@@ -60,6 +60,7 @@ server.post('/users', checkUserExists, checkUserInArray, (req, res) => {
   const { name } = req.body;
 
   users.push(name);
+  
   return res.json(users);
 });
 
