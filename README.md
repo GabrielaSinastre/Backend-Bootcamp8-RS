@@ -5,7 +5,7 @@ Projeto desenvolvido para o Bootcamp GoStack 8.0 da Rocketseat e para estudos do
 ## MÓDULO O1
 Módulo para aprender alguns conceitos de rotas e de CRUD.
 
-## Módulo 02
+## MÓDULO 02
 Implementação de um projeto backend, chamado GoBarber.
 
 ## Scripts
