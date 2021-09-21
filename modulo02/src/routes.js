@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Router } from 'express';
 /* exportar apenas o router e esse de cima é a mesma coisa que:
 const { Router } = require('express'); */
