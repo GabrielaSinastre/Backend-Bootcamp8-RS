@@ -90,9 +90,7 @@ Para padronização do código, usar o ESLint e Prettier, então, segue a config
 - JavaScript
 - Y
 
-Como esse projeto usa yarn ao invés de npm, apagar o "package-lock json" e rodar o yarn para que ele reconheça o eslint (yarn-lock):
-
-### yarn
+Como esse projeto usa yarn ao invés de npm, apagar o "package-lock json" e rodar o yarn para que ele reconheça o eslint (yarn-lock): yarn
 
 no .eslinttc.js:
 module.exports = {
