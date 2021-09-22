@@ -5,6 +5,7 @@ import routes from './routes';
 const express = require('express');
 const routes = require('./routes');
 */
+import './database';
 
 class App {
   // toda vez que chamar essa classe vai executar o metodo constructor
