@@ -1,4 +1,4 @@
-// middleware para verificar se um usuário está logado
+// middleware para verificar se um usuário está logado ou não
 // e se não estiver, algumas ações são limitadas.
 import jwt from 'jsonwebtoken';
 
