@@ -175,3 +175,9 @@ Instalar a dependência:
 Instalar a dependência:
 
 ### `yarn add jsonwebtoken`
+
+## Schema Validation |
+
+Para validar dados de entrada, instalar:
+
+### `yarn add yup`
