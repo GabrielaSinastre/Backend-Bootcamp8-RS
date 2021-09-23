@@ -1,9 +1,22 @@
+import * as Yup from 'yup'; // para validar dados de entrada
 import jwt from 'jsonwebtoken';
 import User from '../models/User';
 import authConfig from '../../config/auth';
 
 class SessionController {
   async store(req, res) {
+    const schema = Yup.object().shape({
+      // required pq ele é obrigatorio
+      email: Yup.string().email().required(),
+      password: Yup.string().required(),
+    });
+
+    // ver se os dados do req.body estão sendo passados como eu quero acima
+    if (!(await schema.isValid(req.body))) {
+      // se retornar falso entra aqui dentro do if
+      return res.status(400).json({ error: 'Validation fails' });
+    }
+
     const { email, password } = req.body;
     // verificar se o email é valido
     const user = await User.findOne({ where: { email } });
