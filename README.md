@@ -181,3 +181,9 @@ Instalar a dependência:
 Para validar dados de entrada, instalar:
 
 ### `yarn add yup`
+
+## Multer
+
+Para lidar com arquivos que não seja do tipo json, ou seja, do tipo multiplatform data
+
+### `yarn add multer`
