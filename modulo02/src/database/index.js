@@ -5,8 +5,9 @@ import databaseConfig from '../config/database'; // importar as config do banco 
 
 // importar os models:
 import User from '../app/models/User';
+import File from '../app/models/File';
 
-const models = [User]; // importar todos os models da aplicação em um array
+const models = [User, File]; // importar todos os models da aplicação em um array
 
 class Database {
   constructor() {
@@ -17,6 +18,9 @@ class Database {
     this.connection = new Sequelize(databaseConfig); // o init do model esta esperando esse comando
     // retornar/exportar um model:
     models.map((model) => model.init(this.connection));
+    models.map(
+      (model) => model.associate && model.associate(this.connection.models)
+    );
   }
 }
 
