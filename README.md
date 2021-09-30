@@ -187,3 +187,9 @@ Para validar dados de entrada, instalar:
 Para lidar com arquivos que não seja do tipo json, ou seja, do tipo multiplatform data
 
 ### `yarn add multer`
+
+## Date-fns
+
+Biblioteca para lidar com datas
+
+### `yarn add date-fns@next`
