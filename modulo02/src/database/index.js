@@ -6,8 +6,9 @@ import databaseConfig from '../config/database'; // importar as config do banco 
 // importar os models:
 import User from '../app/models/User';
 import File from '../app/models/File';
+import Appointment from '../app/models/Appointment';
 
-const models = [User, File]; // importar todos os models da aplicação em um array
+const models = [User, File, Appointment]; // importar todos os models da aplicação em um array
 
 class Database {
   constructor() {

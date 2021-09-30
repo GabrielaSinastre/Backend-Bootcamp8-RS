@@ -2,7 +2,7 @@ import * as Yup from 'yup'; // para validar dados de entrada
 import jwt from 'jsonwebtoken';
 import User from '../models/User';
 import authConfig from '../../config/auth';
-
+// controller para gerenciar uma sessão com o token
 class SessionController {
   async store(req, res) {
     const schema = Yup.object().shape({

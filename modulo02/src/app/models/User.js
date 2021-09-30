@@ -1,4 +1,4 @@
-import { DataTypes, Model, Sequelize } from 'sequelize';
+import Sequelize, { Model } from 'sequelize';
 import bcrypt from 'bcryptjs';
 
 class User extends Model {
@@ -6,11 +6,11 @@ class User extends Model {
     super.init(
       {
         // super vem da classe pai Model
-        name: DataTypes.STRING,
-        email: DataTypes.STRING,
+        name: Sequelize.STRING,
+        email: Sequelize.STRING,
         password: Sequelize.VIRTUAL,
-        password_hash: DataTypes.STRING,
-        provider: DataTypes.BOOLEAN,
+        password_hash: Sequelize.STRING,
+        provider: Sequelize.BOOLEAN,
       },
       {
         sequelize,
@@ -29,7 +29,7 @@ class User extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.File, { foreignKey: 'avatar_id' });
+    this.belongsTo(models.File, { foreignKey: 'avatar_id', as: 'avatar' });
   }
 
   checkPassword(password) {

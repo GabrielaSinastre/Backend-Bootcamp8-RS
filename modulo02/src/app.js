@@ -1,6 +1,8 @@
 /* eslint-disable prettier/prettier */
 import express from 'express';
+import path from 'path'; // para passar o caminho até a pasta de uploads
 import routes from './routes';
+
 /* esse de cima é a mesma coisa que:
 const express = require('express');
 const routes = require('./routes');
@@ -19,6 +21,8 @@ class App {
   middlewares() {
     // cadastrar todos os middlewares da aplicação
     this.server.use(express.json());
+    this.server.use('/files', express.static(path.resolve(__dirname, '..', 'tmp', 'uploads'))
+    ); // recurso do express para tratar coisas estaticas como imagens
   }
 
   routes() {

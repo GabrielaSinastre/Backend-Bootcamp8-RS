@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import * as Yup from 'yup'; // para validar dados de entrada
 import User from '../models/User';
-
+// controller para gerenciar os usuarios
 class UserController {
   async store(req, res) {
     // cadastrar um usuario
