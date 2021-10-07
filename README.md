@@ -193,3 +193,13 @@ Para lidar com arquivos que não seja do tipo json, ou seja, do tipo multiplatfo
 Biblioteca para lidar com datas
 
 ### `yarn add date-fns@next`
+
+## Configurar Mongodb - BD não relacional
+
+Primeiro, criar uma imagem do container no docker:
+
+### `docker run --name mongobarber -p 27017:27017 -d -t mongo`
+
+Adicionar a dependência do MongoDB
+
+### `yarn add mongoose`
