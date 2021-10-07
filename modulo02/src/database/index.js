@@ -1,6 +1,7 @@
 // arquivo para iniciar a conexão com o banco de dados e conectar com os models
 
 import { Sequelize } from 'sequelize';
+import mongoose from 'mongoose';
 import databaseConfig from '../config/database'; // importar as config do banco de dados
 
 // importar os models:
@@ -21,6 +22,13 @@ class Database {
     models.map((model) => model.init(this.connection));
     models.map(
       (model) => model.associate && model.associate(this.connection.models)
+    );
+  }
+
+  mongo() {
+    this.mongoConnection = mongoose.connect(
+      'mongodb://localhost:27017/gobarber',
+      { useNewUrlParser: true, useFindAndModify: true }
     );
   }
 }

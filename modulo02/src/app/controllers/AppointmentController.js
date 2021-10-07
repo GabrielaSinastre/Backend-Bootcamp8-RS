@@ -2,9 +2,40 @@ import * as Yup from 'yup';
 import { startOfHour, parseISO, isBefore } from 'date-fns';
 import Appointment from '../models/Appointment';
 import User from '../models/User';
+import File from '../models/File';
+
 // controler que marca o agendamento de um cliente no banco de dados
 class AppointmentController {
+  async index(req, res) {
+    const { page = 1 } = req.query;
+    const appointments = await Appointment.findAll({
+      where: { user_id: req.userId, canceled_at: null },
+      // ordenar os agendamentos:
+      order: ['date'],
+      limit: 20, // limite de registros por pagina
+      offset: (page - 1) * 20, // quantos registros eu quero pular
+      attributes: ['id', 'date'],
+      // inserir os dados do prestador de serviço
+      include: [
+        {
+          model: User,
+          as: 'provider',
+          attributes: ['id', 'name'],
+          include: [
+            {
+              model: File,
+              as: 'avatar',
+              attributes: ['id', 'path', 'url'],
+            },
+          ],
+        },
+      ],
+    });
+    return res.json(appointments);
+  }
+
   async store(req, res) {
+    // post
     const schema = Yup.object().shape({
       provider_id: Yup.number().required(),
       date: Yup.date().required(),
