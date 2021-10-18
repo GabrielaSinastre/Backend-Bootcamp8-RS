@@ -1,8 +1,12 @@
 import * as Yup from 'yup';
-import { startOfHour, parseISO, isBefore } from 'date-fns';
+import { startOfHour, parseISO, isBefore, format, subHours } from 'date-fns';
+import pt from 'date-fns/locale/pt';
 import Appointment from '../models/Appointment';
 import User from '../models/User';
 import File from '../models/File';
+import Notification from '../schemas/Notification';
+
+import Mail from '../../lib/Mail';
 
 // controler que marca o agendamento de um cliente no banco de dados
 class AppointmentController {
@@ -48,12 +52,12 @@ class AppointmentController {
     const { provider_id, date } = req.body;
 
     // verificar se o provider_id é um provider mesmo
-    const isProvider = await User.findOne({
+    const checkisProvider = await User.findOne({
       where: { id: provider_id, provider: true },
     });
 
     // se não for um provider
-    if (!isProvider) {
+    if (!checkisProvider) {
       return res
         .status(401)
         .json({ error: 'You can only create appointments with providers' });
@@ -89,6 +93,70 @@ class AppointmentController {
       user_id: req.userId,
       provider_id,
       date,
+    });
+
+    // notificar o prestador de serviço quando for criado um agendamento
+    const user = await User.findByPk(req.userId);
+    const formatedDate = format(hourStart, "'dia' dd 'de' MMMM', às' H:mm'h'", {
+      locale: pt,
+    });
+    await Notification.create({
+      content: `Novo agendamento de ${user.name} para ${formatedDate}`,
+      user: provider_id,
+    });
+
+    return res.json(appointment);
+  }
+
+  async delete(req, res) {
+    // o usuario pode deletar um agendamento que ele fez ate 2hrs antes
+    const appointment = await Appointment.findByPk(req.params.id, {
+      include: [
+        {
+          // qual provider vai mandar o email basicamente
+          model: User,
+          as: 'provider',
+          attributes: ['name', 'email'],
+        },
+        {
+          model: User,
+          as: 'user',
+          attributes: ['name'],
+        },
+      ],
+    });
+
+    // ver se o id é diferente do usuario que está logado, se for diferente tem que limitar ele
+    // pois se ele não é dono do agendamento, ele não pode cancelar ele
+    if (appointment.user_id !== req.userId) {
+      return res.status(401).json({
+        error: "'You don't have permission to cancel this appointment.'",
+      });
+    }
+
+    const dateWithSub = subHours(appointment.date, 2);
+    // diminuir 2horas do datewithsub
+    if (isBefore(dateWithSub, new Date())) {
+      return res.status(401).json({
+        error: 'You can only cancel appointments 2 hours in advance.',
+      });
+    }
+    // setar o campo do agendamento cancelado como a data do momento em que foi cancelado
+    appointment.canceled_at = new Date();
+
+    await appointment.save();
+
+    await Mail.sendMail({
+      to: `${appointment.provider.name} < ${appointment.provider.email}>`,
+      subject: 'Agendamento Cancelado',
+      template: 'cancellation',
+      context: {
+        provider: appointment.provider.name,
+        user: appointment.user.name,
+        date: format(appointment.date, "'dia' dd 'de' MMMM', às' H:mm'h'", {
+          locale: pt,
+        }),
+      },
     });
 
     return res.json(appointment);

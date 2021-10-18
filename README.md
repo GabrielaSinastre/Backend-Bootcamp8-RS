@@ -203,3 +203,10 @@ Primeiro, criar uma imagem do container no docker:
 Adicionar a dependência do MongoDB
 
 ### `yarn add mongoose`
+
+Enviar emails - Nodemailer
+Para usar templates de email html/css - Handlerbars
+
+### `yarn add nodemailer`
+
+### `yarn add express-handlebars nodemailer-express-handlebars`

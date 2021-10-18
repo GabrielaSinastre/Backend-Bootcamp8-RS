@@ -14,6 +14,7 @@ const models = [User, File, Appointment]; // importar todos os models da aplica√
 class Database {
   constructor() {
     this.init();
+    this.mongo();
   }
 
   init() {
@@ -28,7 +29,7 @@ class Database {
   mongo() {
     this.mongoConnection = mongoose.connect(
       'mongodb://localhost:27017/gobarber',
-      { useNewUrlParser: true, useFindAndModify: true }
+      { useNewUrlParser: true }
     );
   }
 }
