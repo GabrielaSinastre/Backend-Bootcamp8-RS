@@ -235,3 +235,8 @@ Instalar extensão que trata dos erros async
 Youch - Instalar tratativa de mensagens de erro para uma visualização melhor
 
 ### `yarn add youch`
+
+## Configurar Variáveis de Ambiente - .env
+Adicionar os arquivos .env e .env.examples
+
+### `yarn add dotenv`
