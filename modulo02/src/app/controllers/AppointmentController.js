@@ -18,7 +18,7 @@ class AppointmentController {
       order: ['date'],
       limit: 20, // limite de registros por pagina
       offset: (page - 1) * 20, // quantos registros eu quero pular
-      attributes: ['id', 'date'],
+      attributes: ['id', 'date', 'past', 'cancelable'],
       // inserir os dados do prestador de serviço
       include: [
         {
