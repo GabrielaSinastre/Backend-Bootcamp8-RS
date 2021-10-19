@@ -1,5 +1,5 @@
 // arquivo de configuração do token separado
 export default {
-  secret: 'a74b62d19ae36574b34837cdd420c659',
+  secret: process.env.APP_SECRET,
   expiresIn: '7d',
 };

@@ -21,7 +21,7 @@ class AvailableController {
     const searchDate = Number(date); // garantir que a data esteja em número inteiro
 
     // agora pegar todos os agendamentos que estão nesta data acima
-    const appointments = await Appointment.finddAll({
+    const appointments = await Appointment.findAll({
       where: {
         provider_id: req.params.providerId,
         canceled_at: null,

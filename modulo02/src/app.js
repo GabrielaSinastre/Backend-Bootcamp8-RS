@@ -1,3 +1,4 @@
+import 'dotenv/config'; // carrega todas as variaveis de ambiente e coloca dentro da variavel global do node (process.env))
 import express from 'express';
 import 'express-async-errors';
 import path from 'path'; // para passar o caminho até a pasta de uploads
@@ -44,8 +45,11 @@ class App {
     // criar o novo middleware para tratar as exceções
     // express reconhece que quando tem 4 parametros, ele é um middleware de exceção
     this.server.use(async (err, req, res, next) => {
-      const errors = await new Youch(err, req).toJSON();
-      return res.status(500).json(errors);
+      if (process.env.NODE_ENV === 'development') {
+        const errors = await new Youch(err, req).toJSON();
+        return res.status(500).json(errors);
+      }
+      return res.status(500).json({ error: 'Internal server error.' });
     });
   }
 }
