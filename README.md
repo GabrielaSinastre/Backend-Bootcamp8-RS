@@ -221,3 +221,17 @@ Usar para diminuir o tempo de processamento ao fazer/salvar os registros de noti
 2 - Instalar Bee queue - ferramenta de fila para trabalhos em segundo plano
 
 ### `yarn add bee-queue`
+
+## Ferramenta de Monitoramento de Erros - Sentry
+
+Entrar no site Entry e criar o projeto
+
+### `yarn add @sentry/node @sentry/tracing`
+
+Instalar extensão que trata dos erros async
+
+### `yarn add express-async-errors`
+
+Youch - Instalar tratativa de mensagens de erro para uma visualização melhor
+
+### `yarn add youch`
