@@ -210,3 +210,14 @@ Para usar templates de email html/css - Handlerbars
 ### `yarn add nodemailer`
 
 ### `yarn add express-handlebars nodemailer-express-handlebars`
+
+## Uso do Redis - Banco não relacional
+
+Usar para diminuir o tempo de processamento ao fazer/salvar os registros de notificação
+1 - Criar a imagem no docker:
+
+### `docker run --name redisbarber -p 6379:6379 -d -t redis:alpine`
+
+2 - Instalar Bee queue - ferramenta de fila para trabalhos em segundo plano
+
+### `yarn add bee-queue`
