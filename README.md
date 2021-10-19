@@ -214,7 +214,7 @@ Para usar templates de email html/css - Handlerbars
 ## Uso do Redis - Banco não relacional
 
 Usar para diminuir o tempo de processamento ao fazer/salvar os registros de notificação
-1 - Criar a imagem no docker:
+1 - Criar a imagem bd no docker:
 
 ### `docker run --name redisbarber -p 6379:6379 -d -t redis:alpine`
 
